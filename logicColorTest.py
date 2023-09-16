@@ -1,7 +1,9 @@
 import cv2
 import numpy as np 
 from PIL import Image
-input_img = cv2.imread("pills/turq_circle.jpg")
+import scipy.misc
+
+input_img = cv2.imread("pills/orange_circle.jpg")
 imgtest = 255 - input_img
 img = cv2.resize(input_img, (640, 480))
 cv2.imshow('image', img)
@@ -38,6 +40,15 @@ upper_orange = np.array([20, 255, 220])
 mask_orange = cv2.inRange(hsv,lower_orange,upper_orange)
 mask_orange2 = cv2.inRange(hsv,lower_orange,upper_orange)
 
+lower_grey = np.array([0, 0, 80])
+upper_grey = np.array([255, 25, 160])
+mask_grey = cv2.inRange(hsv,lower_grey ,upper_grey )
+
+lower_black = np.array([0,0,0])
+upper_black = np.array([359,255,25])
+mask_black = cv2.inRange(hsv, lower_black, upper_black)
+
+
 
 
 
@@ -45,7 +56,7 @@ mask_orange2 = cv2.inRange(hsv,lower_orange,upper_orange)
 
  
 # Display filtered image
-cv2.imshow('mask_red', mask_red)
+cv2.imshow('mask_red', mask_turqoise)
 cv2.waitKey(0)
 
 # find contours in the red mask
@@ -54,6 +65,8 @@ contours_green, _ = cv2.findContours(mask_green, cv2.RETR_TREE, cv2.CHAIN_APPROX
 contours_blue, _ = cv2.findContours(mask_blue, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 contours_orange, _ = cv2.findContours(mask_orange, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 contours_turqoise, _ = cv2.findContours(mask_turqoise, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours_grey, _ = cv2.findContours(mask_turqoise, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours_black, _ = cv2.findContours(mask_black, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 
 
@@ -62,20 +75,6 @@ shapes, hierarchyred = cv2.findContours(image=mask_red, mode=cv2.RETR_EXTERNAL, 
 shapes, hierarchyblue = cv2.findContours(image = mask_blue, mode = cv2.RETR_EXTERNAL, method = cv2.CHAIN_APPROX_SIMPLE)
 rect_areas = []
 
-for cnt in contours_red:
-    contour_area = cv2.contourArea(cnt)
-    if contour_area > 1000:
-        x, y, w, h = cv2.boundingRect(cnt)
-        rect_areas.append(w*h)
-        avg_area = np.mean(rect_areas)
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'Red', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-for cnt in contours_red:
-    (x,y,w,h) = cv2.boundingRect(cnt)
-    cnt_area = w * h
-    if cnt_area < 0.5 * avg_area:
-        img[y: y + h, x: x+ w] = 0
-        input_img_cpy[y: y+h, x: x+w] = 0
 
 
 
@@ -100,7 +99,7 @@ for cnt in contours_red:
 
 for cnt in contours_green:
     contour_area = cv2.contourArea(cnt)
-    if contour_area > 1000:
+    if contour_area > 2000:
         isgreen = True
         colors.append('green')
         x, y, w, h = cv2.boundingRect(cnt)
@@ -109,7 +108,7 @@ for cnt in contours_green:
 
 for cnt in contours_blue:
     contour_area = cv2.contourArea(cnt)
-    if contour_area > 1000:
+    if contour_area > 2000:
         isblue = True
         colors.append('blue')
         x, y, w, h = cv2.boundingRect(cnt)
@@ -118,7 +117,7 @@ for cnt in contours_blue:
 
 for cnt in contours_orange:
     contour_area = cv2.contourArea(cnt)
-    if contour_area > 1000:
+    if contour_area > 2000:
         isblue = True
         colors.append('orange')
         x, y, w, h = cv2.boundingRect(cnt)
@@ -127,12 +126,33 @@ for cnt in contours_orange:
 
 for cnt in contours_turqoise:
     contour_area = cv2.contourArea(cnt)
-    if contour_area > 1000:
+    if contour_area > 2000:
         isblue = True
         colors.append('turqoise')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.putText(img, 'turqoise!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+
+
+for cnt in contours_black:
+    contour_area = cv2.contourArea(cnt)
+    if contour_area > 2000:
+        isblue = True
+        colors.append('black')
+        x, y, w, h = cv2.boundingRect(cnt)
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.putText(img, 'black!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+
+for cnt in contours_grey:
+    contour_area = cv2.contourArea(cnt)
+    if contour_area > 2000:
+        isblue = True
+        colors.append('grey')
+        x, y, w, h = cv2.boundingRect(cnt)
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.putText(img, 'gray!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+ 
+ 
  
 
  
