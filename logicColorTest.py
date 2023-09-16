@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import scipy.misc
 
-input_img = cv2.imread("pills/green_square.jpg")
+input_img = cv2.imread("pills/orange_circle.jpg")
 imgtest = 255 - input_img
 img = cv2.resize(input_img, (640, 480))
 cv2.imshow('image', img)
