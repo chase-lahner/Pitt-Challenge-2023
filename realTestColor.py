@@ -1,7 +1,7 @@
 import cv2
 import numpy as np 
 from PIL import Image
-input_img = cv2.imread("pills/green_capsule.jpg")
+input_img = cv2.imread("pills/red_circle.jpg")
 imgtest = 255 - input_img
 img = cv2.resize(input_img, (640, 480))
 #cv2.imshow('image', img)
@@ -84,7 +84,7 @@ for cnt in contours_red:
 # Draw detected contour in input image
 contour_red_cap = cv2.drawContours(input_img_cpy, shapesRed, -1, (255, 0, 255), 3)
 contour_blue_cap = cv2.drawContours(input_img_cpy, shapesBlue, -1, (255,0,255), 3)
-contour_green_cap = cv2.drawContours(input_img_cpy, shapesGreen -1, (255,0,255), 3)
+contour_green_cap = cv2.drawContours(input_img_cpy, shapesGreen, -1, (255,0,255), 3)
 contour_orange_cap = cv2.drawContours(input_img_cpy, shapesOrange, -1, (255, 0, 255), 3)
 contour_turqoise_cap = cv2.drawContours(input_img_cpy, shapesTurqoise, -1, (255, 0, 255), 3)
 
@@ -118,7 +118,7 @@ for cnt in contours_blue:
  
 
 # Dispay contour
-cv2.imshow('image',contour_green_cap) 
+cv2.imshow('image',contour_red_cap) 
 
 
 
