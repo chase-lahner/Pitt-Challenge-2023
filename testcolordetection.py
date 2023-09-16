@@ -1,6 +1,6 @@
 import cv2
 import numpy as np 
-input_img = cv2.imread("pills/whiteBlackback.jpeg")
+input_img = cv2.imread("pills/turq_circle.jpg")
 input_img2 = cv2.imread("pills/grey_circle.jpg")
 img = cv2.resize(input_img, (640, 480))
 img2 = cv2.resize(input_img2, (640, 480))
@@ -50,13 +50,13 @@ mask_grey2 = cv2.inRange(hsv2,lower_grey ,upper_grey )
 
 #black
 lower_black = np.array([0, 0, 0])
-upper_black = np.array([255, 255, 25])
+upper_black = np.array([360, 255, 25])
 mask_black = cv2.inRange(hsv,lower_grey ,upper_grey )
 
 
  
 # Display filtered image
-#cv2.imshow('mask_green', mask_orange)
+cv2.imshow('mask_green', mask_turqoise)
 #cv2.imshow('mask_green2', mask_orange2)
 
 
@@ -79,9 +79,9 @@ mask_black = cv2.inRange(hsv,lower_grey ,upper_grey )
 #contour_blue_cap = cv2.drawContours(input_img_cpy, contours_blue, -1, (255, 0, 255), 3)
 
 # find contours in the turqoise mask
-#contours_turqoise, _ = cv2.findContours(mask_turqoise, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours_turqoise, _ = cv2.findContours(mask_turqoise, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 # Draw detected contour in input image
-#contour_turqoise_cap = cv2.drawContours(input_img_cpy, contours_turqoise, -1, (255, 0, 255), 3)
+contour_turqoise_cap = cv2.drawContours(input_img_cpy, contours_turqoise, -1, (255, 0, 255), 3)
  
 # find contours in the orange mask
 #contours_orange, _ = cv2.findContours(mask_orange, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -89,9 +89,9 @@ mask_black = cv2.inRange(hsv,lower_grey ,upper_grey )
 #contour_orange_cap = cv2.drawContours(input_img_cpy, contours_orange, -1, (255, 0, 255), 3)
 
 #grey
-contours_grey, _ = cv2.findContours(mask_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#contours_grey, _ = cv2.findContours(mask_grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-contour_grey_cap = cv2.drawContours(input_img_cpy, contours_grey, -1, (255, 0, 255), 3)
+#contour_grey_cap = cv2.drawContours(input_img_cpy, contours_grey, -1, (255, 0, 255), 3)
 
 #white
 #contours_white, _ = cv2.findContours(mask_white, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -100,14 +100,14 @@ contour_grey_cap = cv2.drawContours(input_img_cpy, contours_grey, -1, (255, 0, 2
 
 
 
-contours_grey2, _ = cv2.findContours(mask_grey2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#contours_grey2, _ = cv2.findContours(mask_grey2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-contour_grey_cap2 = cv2.drawContours(input_img_cpy2, contours_grey2, -1, (255, 0, 255), 3)
+#contour_grey_cap2 = cv2.drawContours(input_img_cpy2, contours_grey2, -1, (255, 0, 255), 3)
 
 
 # Dispay contour
-cv2.imshow('contour_blue_cap', contour_grey_cap)
-cv2.imshow('contour_blue_cap2', contour_grey_cap2)
+cv2.imshow('contour_blue_cap', contour_turqoise_cap)
+#cv2.imshow('contour_blue_cap2', contour_grey_cap2)
 
 
 cv2.waitKey(0)
