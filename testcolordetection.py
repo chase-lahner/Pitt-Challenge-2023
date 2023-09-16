@@ -24,8 +24,6 @@ lower_green = np.array([40,20, 10])
 upper_green = np.array([90, 255, 255])
 mask_green = cv2.inRange(hsv,lower_green,upper_green)
 
-
-
 #turqoise
 lower_turqoise = np.array([70, 100, 120])
 upper_turqoise = np.array([120, 150, 255])
