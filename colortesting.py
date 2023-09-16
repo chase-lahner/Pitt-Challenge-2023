@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 # define a numpy.ndarray for the color
 # here insert the bgr values which you want to convert to hsv
-green = np.uint8([[[0, 255, 0]]])
+green = np.uint8([[[160, 160, 160]]])
 
 # convert the color to HSV
 hsvGreen = cv2.cvtColor(green, cv2.COLOR_BGR2HSV)
