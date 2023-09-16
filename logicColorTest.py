@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import scipy.misc
 
-input_img = cv2.imread("pills/orange_circle.jpg")
+input_img = cv2.imread("pills/green_square.jpg")
 imgtest = 255 - input_img
 img = cv2.resize(input_img, (640, 480))
 cv2.imshow('image', img)
@@ -18,7 +18,7 @@ hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 lower_red = np.array([0, 50, 50])
 upper_red = np.array([10, 255, 255])
 
-lower_green = np.array([60,20,50])
+lower_green = np.array([40,20,10])
 upper_green = np.array([90,255,255])
 
 
@@ -56,7 +56,7 @@ mask_black = cv2.inRange(hsv, lower_black, upper_black)
 
  
 # Display filtered image
-cv2.imshow('mask_red', mask_turqoise)
+cv2.imshow('mask_red', mask_green)
 cv2.waitKey(0)
 
 # find contours in the red mask
