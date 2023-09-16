@@ -13,9 +13,27 @@ hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # define range of red color in HSV
 lower_red = np.array([0, 50, 50])
 upper_red = np.array([10, 255, 255])
-
- #create a mask for red color
 mask_red = cv2.inRange(hsv, lower_red, upper_red)
+
+#green
+lower_green = np.array([50, 100, 100])
+upper_green = np.array([70, 255, 255])
+mask_green = cv2.inRange(hsv,lower_green,upper_green)
+
+#turqoise
+lower_turqoise = np.arrray([5, 100, 100])
+upper_turqoise = np.array([25, 255, 255])
+mask_turqoise = cv2.inRange(hsv,lower_green,upper_green)
+
+
+#blue
+lower_blue = np.array ([0, 100, 100])
+upper_blue = np.array([10, 255, 255])
+
+#grey
+lower_grey = np.array([0, 100, 100])
+upper_grey = np.array([10, 255, 255])
+
  
 # Display filtered image
 cv2.imshow('mask_red', mask_red)
