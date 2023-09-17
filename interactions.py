@@ -25,12 +25,15 @@ def find_drug_interactions(drug_name):
                     text = "" + (f"No drug interactions found for {drug_name}.")
             else:
                 text = "" + (f"No information found for {drug_name}.")
+                search_again = True
         else:
             text = "" + (f"Failed to retrieve data from OpenFDA API. Status code: {response.status_code}")
+            search_again = False
     except Exception as e:
         text = "" + (f"An error occurred: {str(e)}")
+        search_again = False
 
-    return text
+    return [text, search_again]
 
 # if __name__ == "__main__":
 #     drug_name = input("Enter the name of the drug: ")

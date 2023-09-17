@@ -4,7 +4,7 @@ import tempfile
 import os
 from colorAndShape import identify
 from testcloudapi import detect_text
-from scraper import get_headlines
+from scraper import search_drug_by_imprint
 from interactions import find_drug_interactions
 
 
@@ -54,25 +54,33 @@ def main():
         # Optical Character Recognition
         if st.sidebar.checkbox("Optical Character Recognition"):
             ocr_completed = True
-            texts = detect_text(temp_image_path)
+            text = detect_text(temp_image_path)
             st.write("Recognized text:")
-            st.write(texts)
+            st.write(text)
 
         # Pill Identification via Scraping
         if ocr_completed == True:
             if st.sidebar.checkbox("Pill Identification via Scraping"):
-                headlines = get_headlines(texts)
-                st.write("Headlines:")
-                for text in headlines:
-                    st.write(text)
+                keywords = search_drug_by_imprint(text)
+                st.write("Keywords:")
+                for maybe_medicine in keywords:
+                    st.write(maybe_medicine)
 
         # Pill Identification via Image Processing using OpenFDA API
         if ocr_completed == True:
             if st.sidebar.checkbox("Pill Interactions via OpenFDA API"):
                 st.write("Pill Interactions via OpenFDA API:")
-                interactions = find_drug_interactions(texts)
-                st.write(interactions)
-    
+                interactions = find_drug_interactions(keywords[0])
+                if interactions[1] == True:
+                    interactions = find_drug_interactions(keywords[1])
+                    if interactions [1] == True:
+                        interactions = find_drug_interactions(keywords[2])
+                        st.write(interactions[2])
+                    else:
+                        st.write(interactions[2])
+                else:
+                    st.write(interactions[1])
+                st.write(interactions[0])
 
 if __name__ == "__main__":
     main()
