@@ -3,10 +3,12 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-input_img = cv2.imread('pills/turq_circle.jpg')
+input_img = cv2.imread('pills/grey_circle.jpg')
 input_img2 = cv2.imread("pills/grey_circle.jpg")
 img = cv2.resize(input_img, (640, 480))
 img2 = cv2.resize(input_img2, (640, 480))
+
+
 #cv2.imshow('image', img)
 input_img_cpy = img.copy()
 input_img_cpy2 = img2.copy()
@@ -171,10 +173,10 @@ for cnt in contours_grey:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2500:
         isblue = True
-        colors.append('GREY')
+        colors.append('WHITE')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'GREY!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'WHITE!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
  
 
 if colors[0] == 'GREEN':
@@ -341,7 +343,7 @@ elif colors[0] == 'BLUE':
             cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         
-elif colors[0] == 'GREY':
+elif colors[0] == 'WHITE':
     i = 0
     for contour in contours_grey:
     
@@ -561,6 +563,8 @@ cv2.destroyAllWindows()
 print(colors)
 print(shape)
 
+
+
 f = open("shapeAndColorResult.txt", "w+")
 
 f.write(colors[0] + "\n")
@@ -568,4 +572,19 @@ f.write(shape)
 f.close()
 
 
-
+pills= pd.read_csv("Pillbox.csv", low_memory = False)
+pills.drop(labels=['ID', 'Enabled?', 'created at', 'updated at', 
+'spp', 'setid', 'splsize', 'pillbox_size',
+'splscore', 'pillbox_score', 'splimprint', 'pillbox_imprint', 
+ 'spl_strength', 'spl_ingredients', 
+'spl_inactive_ing', 'source', 'rxtty', 'rxstring', 'rxcui', 'RxNorm Update time', 
+'product_code', 'part_num', 'ndc9', 'ndc_labeler_code', 
+'ndc_product_code','splshape','splcolor', 'marketing_act_code', 'effective_time', 'file_name', 
+'equal_product_code', 'dosage_form', 'document_type', 'dea_schedule_code', 'dea_schedule_name', 
+'author_type', 'author', 'approval_code', 'image_source', 'splimage', 'has_image', 'epc_match',
+ 'version_number', 'pillbox_shape_text','pillbox_color_text','part_medicine_name','laberer_code', 'application_number', 'updated', 'stale', 'new', 'Pillbox Value']
+          ,axis = 1, inplace= True)
+col = pills.pop('medicine_name')
+pills.set_index(col, inplace = True)
+refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
+print(refinedpills)
