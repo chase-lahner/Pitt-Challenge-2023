@@ -1,4 +1,5 @@
 import requests
+import time
 
 def find_drug_interactions(drug_name):
     # Replace with your OpenFDA API endpoint
@@ -12,6 +13,7 @@ def find_drug_interactions(drug_name):
 
     try:
         response = requests.get(api_url, params=params)
+        time.sleep(2)
 
         if response.status_code == 200:
             data = response.json()
@@ -28,7 +30,7 @@ def find_drug_interactions(drug_name):
                 search_again = True
         else:
             text = "" + (f"Failed to retrieve data from OpenFDA API. Status code: {response.status_code}")
-            search_again = False
+            search_again = True
     except Exception as e:
         text = "" + (f"An error occurred: {str(e)}")
         search_again = False
