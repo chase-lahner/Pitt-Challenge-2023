@@ -1,9 +1,6 @@
-opencv-python
-cv2
-numpy
+opencv-python-headless
 pillow
-pytesseract
 matplotlib.pyplot
 pandas
-cv2
-miscpy.
+bs4
+requests

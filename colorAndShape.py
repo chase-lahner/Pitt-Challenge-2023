@@ -597,3 +597,5 @@ def identify(name):
         if item == True:
             finalpill.append(item)
 
+    return finalpill
+
