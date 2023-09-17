@@ -309,7 +309,7 @@ def identify(name):
 
             # cv2.approxPloyDP() function to approximate the shape
             approx = cv2.approxPolyDP(
-                contour, 0.05 * cv2.arcLength(contour, True), True)
+                contour, 0.01 * cv2.arcLength(contour, True), True)
             
             # using drawContours() function
             cv2.drawContours(input_img, [contour], 0, (0, 0, 255), 5)
@@ -562,8 +562,8 @@ def identify(name):
     detected = tci.detect_text(name)
     st.markdown(detected)
 
-    descriptors = detected.split()
-    descriptors = np.array(descriptors)
+    descriptors = detected.split(" ")
+#    descriptors = np.array(descriptors)
 
     
 
@@ -587,10 +587,13 @@ def identify(name):
     finalpill =[]
     #pills.loc[pills.splimprint.isin(detected)].index
     pills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
-    wowza = pills['splimprint'].str.contains(detected[0])
+    wowza = pills['splimprint'].str.contains(descriptors[0])
     wowza.dropna()
     display = wowza.sort_values(ascending = False)
     st.dataframe(display.head(5))
+    st.markdown('color: '+ colors[0])
+    st.markdown('shape'+ shape)
+    
     print(wowza)
     
     for item in wowza:
