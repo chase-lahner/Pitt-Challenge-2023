@@ -1,3 +1,7 @@
 numpy
 pillow
 pytesseract
+matplotlib.pyplot
+pandas
+cv2
+miscpy.
