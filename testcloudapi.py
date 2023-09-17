@@ -40,4 +40,4 @@ def detect_text(path):
     
     return entity
 
-print(detect_text('croppedPills/green_square.jpg'))
+

@@ -1,3 +1,4 @@
+import testcloudapi as tci
 import cv2
 import numpy as np 
 import pandas as pd
@@ -5,6 +6,9 @@ import streamlit as st
 import PIL 
 from pathlib import Path
 import os
+
+
+
 
 def identify(name):
     shape = "notsquare"
@@ -554,7 +558,13 @@ def identify(name):
                 cv2.putText(img, 'ROUND', (x, y),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 
+    
+    detected = tci.detect_text(name)
+    st.markdown(detected)
 
+    descriptors = detected.split()
+
+    print(descriptors)
 
     pills= pd.read_csv("Pillbox.csv", low_memory = False)
     pills.drop(labels=['ID', 'Enabled?', 'created at', 'updated at', 
