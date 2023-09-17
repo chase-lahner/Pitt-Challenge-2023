@@ -563,8 +563,9 @@ def identify(name):
     st.markdown(detected)
 
     descriptors = detected.split()
+    descriptors = np.array(descriptors)
 
-    print(descriptors)
+    
 
     pills= pd.read_csv("Pillbox.csv", low_memory = False)
     pills.drop(labels=['ID', 'Enabled?', 'created at', 'updated at', 
@@ -580,7 +581,8 @@ def identify(name):
             ,axis = 1, inplace= True)
     col = pills.pop('medicine_name')
     pills.set_index(col, inplace = True)
-    pills.loc[pills.Col4.isin(detected)].index
+    pills.index[np.in1d(pills['splimprint'],descriptors)]
+   
     refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
     st.markdown(colors[0])
     st.markdown(shape)
