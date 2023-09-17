@@ -14,7 +14,7 @@ def test_ocr():
     # Print the extracted text
     print("Extracted Text: " + result)
 
-    cv2.waitKey();
+    cv2.waitKey()
 
 if __name__ == "__main__":
     test_ocr()
