@@ -11,24 +11,20 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print("Texts:")
+    # print("Texts:")
 
-    for text in texts:
-        print(f'\n"{text.description}"')
+    # for text in texts:
+    #     print(f'\n"{text.description}"')
 
-        vertices = [
-            f"({vertex.x},{vertex.y})" for vertex in text.bounding_poly.vertices
-        ]
+    #     vertices = [
+    #         f"({vertex.x},{vertex.y})" for vertex in text.bounding_poly.vertices
+    #     ]
 
-        print("bounds: {}".format(",".join(vertices)))
+    #     print("bounds: {}".format(",".join(vertices)))
 
-    length = 0
-
-    for text in texts:
-        
-        temp = text.description
-        if len(text.description) > length:
-            length = len(text.description)
+    # length = 0
+    
+    print(f"{texts[0].description}")
         
 
     
