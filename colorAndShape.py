@@ -1,4 +1,4 @@
-#import testcloudapi as tci
+import testcloudapi as tci
 import cv2
 import numpy as np 
 import pandas as pd
@@ -559,11 +559,11 @@ def identify(name):
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 
     
-    # detected = tci.detect_text(name)
-    # st.markdown(detected)
+    detected = tci.detect_text(name)
+    st.markdown(detected)
 
-    #descriptors = detected.split()
-    #descriptors = np.array(descriptors)
+    descriptors = detected.split()
+    descriptors = np.array(descriptors)
 
     
 
@@ -583,14 +583,14 @@ def identify(name):
     pills.set_index(col, inplace = True)
 
     pills.drop_duplicates()
-    detected = ["ORTH"]
+    #detected = ["ORTH"]
     finalpill =[]
     #pills.loc[pills.splimprint.isin(detected)].index
     pills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
     wowza = pills['splimprint'].str.contains(detected[0])
     wowza.dropna()
     display = wowza.sort_values(ascending = False)
-    st.dataframe(display)
+    st.dataframe(display.head(5))
     print(wowza)
     
     for item in wowza:
