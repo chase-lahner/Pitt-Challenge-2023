@@ -562,8 +562,8 @@ def identify(name):
     # detected = tci.detect_text(name)
     # st.markdown(detected)
 
-    descriptors = detected.split()
-    descriptors = np.array(descriptors)
+    #descriptors = detected.split()
+    #descriptors = np.array(descriptors)
 
     
 
