@@ -29,4 +29,6 @@ def get_headlines(text):
 
         return headlines
 
-        
+# pittsburgh_headlines = get_headlines("pittsburgh")
+# for text in pittsburgh_headlines:
+#     print(text)
