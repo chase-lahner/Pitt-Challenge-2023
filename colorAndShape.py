@@ -14,6 +14,8 @@ def identify(name):
     input_img_cpy = img.copy()
     shape = ''
 
+
+
     # Convert RGB/ BGR to HSV color space
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -171,11 +173,11 @@ def identify(name):
         contour_area = cv2.contourArea(cnt)
         if contour_area > 2500:
             isblue = True
-            colors.append('GREY')
+            colors.append('WHITE')
             x, y, w, h = cv2.boundingRect(cnt)
             cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-            cv2.putText(img, 'GREY!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-    
+            cv2.putText(img, 'WHITE!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+ 
 
     if colors[0] == 'GREEN':
         i = 0
@@ -570,6 +572,3 @@ def identify(name):
     pills.set_index(col, inplace = True)
     refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
     st.dataframe(refinedpills.head(5))
-
-
-
