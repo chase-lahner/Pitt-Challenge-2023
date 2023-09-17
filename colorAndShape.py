@@ -569,7 +569,7 @@ def identify(name):
     pills= pd.read_csv("Pillbox.csv", low_memory = False)
     pills.drop(labels=['ID', 'Enabled?', 'created at', 'updated at', 
     'spp', 'setid', 'splsize', 'pillbox_size',
-    'splscore', 'pillbox_score', 'splimprint', 'pillbox_imprint', 
+    'splscore', 'pillbox_score', 'pillbox_imprint', 
     'spl_strength', 'spl_ingredients', 
     'spl_inactive_ing', 'source', 'rxtty', 'rxstring', 'rxcui', 'RxNorm Update time', 
     'product_code', 'part_num', 'ndc9', 'ndc_labeler_code', 
@@ -580,6 +580,7 @@ def identify(name):
             ,axis = 1, inplace= True)
     col = pills.pop('medicine_name')
     pills.set_index(col, inplace = True)
+    pills.loc[pills.Col4.isin(detected)].index
     refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
     st.markdown(colors[0])
     st.markdown(shape)

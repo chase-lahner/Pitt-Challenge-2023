@@ -5,7 +5,7 @@ import colorAndShape as cs
 DATE_COLUMN = 'date/time'
 
 st.title('Drug Wizard')
-img = st.file_uploader("file plesas")
+img = st.file_uploader("Please upload a .jpg, .png pr .jpeg file of the pill you would like identified.")
 if img is not None:
     x = open("/tmp/incoming/onefile", "wb+")
     x.write(img.read())
