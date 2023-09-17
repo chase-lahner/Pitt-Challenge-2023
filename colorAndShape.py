@@ -1,4 +1,4 @@
-import testcloudapi as tci
+#import testcloudapi as tci
 import cv2
 import numpy as np 
 import pandas as pd
@@ -559,13 +559,19 @@ def identify(name):
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 
     
-    detected = tci.detect_text(name)
-    st.markdown(detected)
+    # detected = tci.detect_text(name)
+    # st.markdown(detected)
 
+<<<<<<< HEAD
     descriptors = detected.split()
     descriptors = np.array(descriptors)
 
     
+=======
+    # descriptors = detected.split()
+
+    # print(descriptors)
+>>>>>>> 4073ab80062b95435b849d42b2b864529260bc5c
 
     pills= pd.read_csv("Pillbox.csv", low_memory = False)
     pills.drop(labels=['ID', 'Enabled?', 'created at', 'updated at', 
@@ -581,8 +587,12 @@ def identify(name):
             ,axis = 1, inplace= True)
     col = pills.pop('medicine_name')
     pills.set_index(col, inplace = True)
+<<<<<<< HEAD
     pills.index[np.in1d(pills['splimprint'],descriptors)]
    
+=======
+    #pills.loc[pills.splimprint.isin(detected)].index
+>>>>>>> 4073ab80062b95435b849d42b2b864529260bc5c
     refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
     st.markdown(colors[0])
     st.markdown(shape)
