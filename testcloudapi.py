@@ -24,8 +24,10 @@ def detect_text(path):
 
     # length = 0
     
-    print(f"{texts[0].description}")
-        
+    entity = texts[0].description
+    #print(f"{texts[0].description}")
+    entity = entity.replace('\n',' ')
+    #print(entity)
 
     
     
@@ -35,5 +37,7 @@ def detect_text(path):
             "{}\nFor more info on error messages, check: "
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
+    
+    return entity
 
-detect_text('croppedPills/green_square.jpg')
+print(detect_text('croppedPills/green_square.jpg'))
