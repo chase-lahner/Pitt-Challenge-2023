@@ -1,6 +1,9 @@
 import cv2
 import numpy as np 
-input_img = cv2.imread("pills/green_square.jpg")
+import pandas as pd
+import streamlit as st
+
+input_img = cv2.imread('pills/turq_circle.jpg')
 input_img2 = cv2.imread("pills/grey_circle.jpg")
 img = cv2.resize(input_img, (640, 480))
 img2 = cv2.resize(input_img2, (640, 480))
@@ -112,69 +115,69 @@ for cnt in contours_red:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 1000:
         isred = True
-        colors.append('red')
+        colors.append('RED')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'Red', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'RED', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 
 for cnt in contours_green:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2000:
         isgreen = True
-        colors.append('green')
+        colors.append('GREEN')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'green!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'GREEN!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 for cnt in contours_blue:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2000:
         isblue = True
-        colors.append('blue')
+        colors.append('BLUE')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'blue!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'BLUE!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 for cnt in contours_orange:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2500:
         isblue = True
-        colors.append('orange')
+        colors.append('ORANGE')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'orange!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'ORANGE!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 for cnt in contours_turqoise:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2500:
         isblue = True
-        colors.append('turqoise')
+        colors.append('TURQOISE')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'turqoise!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'TURQOISE!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 
 for cnt in contours_black:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2500:
         isblue = True
-        colors.append('black')
+        colors.append('BLACK')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'black!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'BLACK!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 for cnt in contours_grey:
     contour_area = cv2.contourArea(cnt)
     if contour_area > 2500:
         isblue = True
-        colors.append('grey')
+        colors.append('GREY')
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cv2.putText(img, 'gray!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+        cv2.putText(img, 'GREY!!', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
  
 
-if colors[0] == 'green':
+if colors[0] == 'GREEN':
     print('gggggg')
     i = 0
     for contour in contours_green:
@@ -191,7 +194,7 @@ if colors[0] == 'green':
 
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.05 * cv2.arcLength(contour, True), True)
+            contour, 0.04 * cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(input_img, [contour], 0, (0, 0, 255), 5)
@@ -204,34 +207,34 @@ if colors[0] == 'green':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = circle
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
 
 
             
-elif colors[0] == 'red':
+elif colors[0] == 'RED':
     i = 0
     for contour in contours_red:
     
@@ -247,7 +250,7 @@ elif colors[0] == 'red':
 
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.05 * cv2.arcLength(contour, True), True)
+            contour, 0.033* cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(input_img, [contour], 0, (0, 0, 255), 5)
@@ -260,32 +263,32 @@ elif colors[0] == 'red':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'pentagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'cricle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
 
-elif colors[0] == 'blue':
+elif colors[0] == 'BLUE':
     i = 0
     for contour in contours_blue:
     
@@ -314,31 +317,31 @@ elif colors[0] == 'blue':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'circle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         
-elif colors[0] == 'grey':
+elif colors[0] == 'GREY':
     i = 0
     for contour in contours_grey:
     
@@ -354,7 +357,7 @@ elif colors[0] == 'grey':
 
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.05 * cv2.arcLength(contour, True), True)
+            contour, 0.04 * cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(input_img, [contour], 0, (0, 0, 255), 5)
@@ -367,31 +370,31 @@ elif colors[0] == 'grey':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'circle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-elif colors[0] == 'orange':
+elif colors[0] == 'ORANGE':
     i = 0
     for contour in contours_orange:
     
@@ -420,31 +423,31 @@ elif colors[0] == 'orange':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'circle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
-elif colors[0] == 'turqoise':
+elif colors[0] == 'TURQOISE':
     i = 0
     for contour in contours_turqoise:
     
@@ -460,7 +463,7 @@ elif colors[0] == 'turqoise':
 
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.05 * cv2.arcLength(contour, True), True)
+            contour, 0.02 * cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(input_img, [contour], 0, (0, 0, 255), 5)
@@ -473,31 +476,31 @@ elif colors[0] == 'turqoise':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'circle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-elif colors[0] == 'black':
+elif colors[0] == 'BLACK':
     i = 0
     for contour in contours_black:
     
@@ -526,34 +529,35 @@ elif colors[0] == 'black':
     
         # putting shape name at center of each shape
         if len(approx) == 3:
-            shape = 'triangle'
-            cv2.putText(img, 'Triangle', (x, y),
+            shape = 'TRIANGLE'
+            cv2.putText(img, 'TRIANGLE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 4:
-            shape = 'quadrilateral'
-            cv2.putText(img, 'Quadrilateral', (x, y),
+            shape = 'SQUARE'
+            cv2.putText(img, 'SQUARE', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 5:
-            shape = 'pentagon'
-            cv2.putText(img, 'Pentagon', (x, y),
+            shape = 'PENTAGON'
+            cv2.putText(img, 'PENTAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         elif len(approx) == 6:
-            shape = 'hexagon'
-            cv2.putText(img, 'Hexagon', (x, y),
+            shape = 'HEXAGON'
+            cv2.putText(img, 'HEXAGON', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
     
         else:
-            shape = 'circle'
-            cv2.putText(img, 'circle', (x, y),
+            shape = 'ROUND'
+            cv2.putText(img, 'ROUND', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
 
 
 cv2.imshow('contour_blue_cap', img)
 cv2.waitKey(0)
+cv2.destroyAllWindows()
 print(colors)
 print(shape)
 
@@ -562,3 +566,6 @@ f = open("shapeAndColorResult.txt", "w+")
 f.write(colors[0] + "\n")
 f.write(shape)
 f.close()
+
+
+
