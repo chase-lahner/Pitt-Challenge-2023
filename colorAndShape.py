@@ -580,9 +580,17 @@ def identify(name):
             ,axis = 1, inplace= True)
     col = pills.pop('medicine_name')
     pills.set_index(col, inplace = True)
+    pills.drop_duplicates()
+    detected = ["ORTH"]
+    finalpill =[]
     #pills.loc[pills.splimprint.isin(detected)].index
-    refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
-    st.markdown(colors[0])
-    st.markdown(shape)
-
-    st.dataframe(refinedpills.head(5))
+    pills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
+    wowza = pills['splimprint'].str.contains(detected[0])
+    wowza.dropna()
+    display = wowza.sort_values(ascending = False)
+    st.dataframe(display)
+    print(wowza)
+    
+    for item in wowza:
+        if item == True:
+            finalpill.append(item)
