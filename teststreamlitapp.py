@@ -4,8 +4,8 @@ import tempfile
 import os
 from colorAndShape import identify
 from testcloudapi import detect_text
-from scraper import search_drug_by_imprint
-from interactions import find_drug_interactions
+from codeDrafts.scraper import search_drug_by_imprint
+from codeDrafts.interactions import find_drug_interactions
 
 
 # Function to process the uploaded image
