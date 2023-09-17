@@ -342,7 +342,7 @@ def identify(name):
                 cv2.putText(img, 'ROUND', (x, y),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
-    elif colors[0] == 'GREY':
+    elif colors[0] == 'WHITE':
         i = 0
         for contour in contours_grey:
         
@@ -571,4 +571,7 @@ def identify(name):
     col = pills.pop('medicine_name')
     pills.set_index(col, inplace = True)
     refinedpills = (pills[(pills['splshape_text'] == shape) & (pills['splcolor_text'] == colors[0])])
+    st.markdown(colors[0])
+    st.markdown(shape)
+
     st.dataframe(refinedpills.head(5))
